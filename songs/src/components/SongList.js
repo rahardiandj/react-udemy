@@ -3,9 +3,29 @@ import { connect } from 'react-redux';
 
 
 class SongList extends Component {
+    
+    renderList() {
+        return this.props.songs.map((song) => {
+            return (
+                <div className="item" key={song.title} >
+                    <div className="right floated content">
+                        <button className="ui button promary">
+                            Select
+                        </button>
+                    </div>
+                    <div className="content">{song.title}</div>
+                </div>
+            );
+        });
+    }
+
     render() {
-        return <div>Song List</div>
+        return <div className="ui divided list">{this.renderList()}</div>
     }
 }
 
-export default SongList;
+const mapStateToProps = state => {
+    return {songs : state.songs};
+
+ }
+export default connect(mapStateToProps)(SongList);
